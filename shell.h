@@ -22,8 +22,11 @@ void led_task_handler(void);
 
 class Shell {
 public:
-    void init_shell();
-    void exit_shell();
+    Shell() = default;
+    ~Shell() = default;
+    void init();
+    bool run(std::string cmd);
+    void exit();
 private:
     shell_task_t task_list[SHELL_TASK_BUFFER]=
     {
@@ -32,6 +35,5 @@ private:
     };
 };
 extern Shell shell;
-void shell_print_hello(void);
 
 #endif //SHELL_H

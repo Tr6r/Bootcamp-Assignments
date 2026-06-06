@@ -3,6 +3,13 @@
 
 int main()
 {
-    shell_print_hello();
+    shell.init();
+    std::string cmd;
+    while(true)
+    {
+        std::getline(std::cin, cmd);
+        if(!shell.run(cmd)) break;
+    }
+    shell.exit();
     return 0;
 }

@@ -1,9 +1,21 @@
 #include <iostream>
 #include "shell.h"
 
-void shell_print_hello(void)
+Shell shell;
+bool Shell::run(std::string cmd)
 {
-    std::cout<<"shell hello\n";
+    if(cmd == "exit") return false;
+    std::cout << "cmd: " << cmd<<std::endl;
+    
+    return true;
+}
+void Shell::init()
+{
+    std::cout << "Shell init" << std::endl;
+}
+void Shell::exit()
+{
+    std::cout << "Shell exit" << std::endl;
 }
 void auth_task_handler(void)
 {
@@ -13,4 +25,3 @@ void led_task_handler(void)
 {
     std::cout<<"led\n";
 }
-Shell shell;

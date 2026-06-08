@@ -24,6 +24,7 @@ TEST(ShellTest, WhiteSpaceCommand)
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_NE(output.find("==========ACTION=========="),std::string::npos);
 }
+
 // Test action
 TEST(ParserTest, ValidAction)
 {
@@ -32,10 +33,15 @@ TEST(ParserTest, ValidAction)
     EXPECT_TRUE(shell.check_action_valid("--set"));
 }
 
+TEST(ParserTest, InvalidEmbeddedAction)
+{
+    Shell shell;
+    EXPECT_FALSE(shell.check_action_valid("aa--setaa"));
+}
+
 TEST(ParserTest, InvalidAction)
 {
     Shell shell;
-
     EXPECT_FALSE(shell.check_action_valid("set"));
 }
 
@@ -58,7 +64,6 @@ TEST(ShellTest, HelpTarget)
 }
 
 // Test target
-
 TEST(ParserTest, ValidTarget)
 {
     Shell shell;
@@ -69,8 +74,15 @@ TEST(ParserTest, ValidTarget)
 TEST(ParserTest, InvalidTarget)
 {
     Shell shell;
-    EXPECT_FALSE(shell.check_target_valid("--set tar=ledd"));
+    EXPECT_FALSE(shell.check_target_valid("--set tar=lefff"));
 }
+
+TEST(ParserTest, InvalidEmbeddedTarget)
+{
+    Shell shell;
+    EXPECT_FALSE(shell.check_target_valid("--set tar=lllleddd"));
+}
+
 
 TEST(ShellTest, HelpParams)
 {

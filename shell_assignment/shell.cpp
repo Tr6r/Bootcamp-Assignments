@@ -74,7 +74,7 @@ const char* Shell::get_shell_act_by_name(task_action_t action)
 
 void Shell::introduce_action()
 {
-    cout << "========== ACTION ==========" << endl;    
+    cout << "==========ACTION==========" << endl;    
     for(uint8_t i = 0; action_list[i].name != nullptr; i++)
     {
         cout << action_list[i].name<<" tar=<target> param=<param>"<< endl;
@@ -85,7 +85,7 @@ void Shell::introduce_action()
 
 void Shell::introduce_target(task_action_t action)
 {
-    cout << "========== TARGET ==========" << endl;
+    cout << "==========TARGET==========" << endl;
     const char* task_name = get_shell_act_by_name(action);
 
     cout << "<action> tar=<target>" << endl;
@@ -99,7 +99,7 @@ void Shell::introduce_target(task_action_t action)
 
 static void introduct_led()
 {
-    cout << "========== LED ==========" << endl;
+    cout << "==========LED==========" << endl;
     cout << "--get tar=led" << endl;
     cout << "--set tar=led status=on" << endl;
     cout << "--set tar=led status=off" << endl;

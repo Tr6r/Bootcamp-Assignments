@@ -1,5 +1,5 @@
-#ifndef SHELL_H
-#define SHELL_H
+#ifndef __SHELL_H__
+#define __SHELL_H__
 
 #include <stdint.h>
 #include <string.h>
@@ -61,4 +61,4 @@ private:
 };
 extern Shell shell;
 
-#endif //SHELL_H
+#endif //__SHELL_H__

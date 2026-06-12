@@ -4,6 +4,38 @@
 using namespace std;
 
 Shell shell;
+
+//HELPER 
+string get_param(const string& cmd, const string& key)
+{
+    size_t pos = cmd.find(key + "=");
+    if(pos == string::npos)
+        return "";
+    pos += key.length() + 1;
+    size_t end = cmd.find(' ', pos);
+    if(end == string::npos)
+        end = cmd.length();
+    return cmd.substr(pos, end - pos);
+}
+
+//HELPER 
+string get_action(const string& cmd)
+{
+    size_t pos = cmd.find("--");
+
+    if(pos == string::npos)
+        return "";
+
+    pos += 2;
+
+    size_t end = cmd.find(' ', pos);
+
+    if(end == string::npos)
+        end = cmd.length();
+
+    return cmd.substr(pos, end - pos);
+}
+
 bool Shell::run(std::string cmd)
 {
     if(cmd == "exit") return false;
@@ -25,18 +57,23 @@ bool Shell::run(std::string cmd)
 }
 shell_task_t* Shell::check_target_valid(string cmd)
 {
+    string target = get_param(cmd, "tar");
+    if(target == "") return NULL;
     for(uint8_t i = 0; task_list[i].cmd != NULL; i++)
     {
-        if(cmd.find(task_list[i].cmd) != string::npos )return &task_list[i];
+        if(task_list[i].cmd == target )return &task_list[i];
     }
     return NULL;
 }
 
 task_action_t Shell::check_action_valid(string cmd)
 {
+    string action = get_action(cmd);
+    cout<<action<<endl;
+    if(action == "") return TASK_ACTION_NONE;
     for(uint8_t i = 0; action_list[i].name != NULL; i++)
     {
-        if(cmd.find(action_list[i].name) != string::npos )return action_list[i].action;
+        if(action_list[i].name == action)return action_list[i].action;
     }
     return TASK_ACTION_NONE;
 }
@@ -47,19 +84,6 @@ void Shell::init()
 void Shell::exit()
 {
     cout << "Shell exit" << endl;
-}
-
-//HELPER 
-string get_param(const string& cmd, const string& key)
-{
-    size_t pos = cmd.find(key + "=");
-    if(pos == string::npos)
-        return "";
-    pos += key.length() + 1;
-    size_t end = cmd.find(' ', pos);
-    if(end == string::npos)
-        end = cmd.length();
-    return cmd.substr(pos, end - pos);
 }
 
 const char* Shell::get_shell_act_by_name(task_action_t action)

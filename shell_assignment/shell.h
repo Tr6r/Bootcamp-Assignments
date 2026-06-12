@@ -46,9 +46,9 @@ public:
 private:
     shell_action_t action_list[SHELL_ACTION_BUFFER]=
     {
-        {"--help",TASK_ACTION_HELP},
-        {"--get",TASK_ACTION_GET},
-        {"--set",TASK_ACTION_SET},
+        {"help",TASK_ACTION_HELP},
+        {"get",TASK_ACTION_GET},
+        {"set",TASK_ACTION_SET},
         {NULL,TASK_ACTION_NONE}
     };
 
